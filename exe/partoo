@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'partoo/cli'
+
+Partoo::CLI.start
