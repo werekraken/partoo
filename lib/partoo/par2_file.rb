@@ -46,6 +46,10 @@ module Partoo
       main_packet[0]['body']['recovery_set_file_count']
     end
 
+    def recovery_set_id
+      main_packet[0]['recovery_set_id']
+    end
+
     def creator_packet
       packets.select {|p| p['packet_type'] == "PAR 2.0\0Creator\0" }
     end
