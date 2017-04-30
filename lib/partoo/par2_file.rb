@@ -11,21 +11,23 @@ module Partoo
 
     def list
       file_ids.map do |id|
-        f = file_description_packet_by_id(id)[0]['body']
-        crc = ""
-        input_file_slice_checksum_packet_by_id(id)[0]['body']['chunk_checksums'].each do |cc|
-          crc_b = cc['crc32']
-          if crc != ""
-            crc = Zlib.crc32_combine(crc, crc_b, slice_size)
-          else
-            crc = crc_b
-          end
-        end
-        pad_length = slice_size - f.file_length % slice_size
-        crc_z = Zlib.crc32("\0" * pad_length)
-        crc = Partoo::CRC32.crc32_trim_trailing(crc, crc_z, pad_length)
-        [f, {:file_crc32 => crc}]
+        [file_description_packet_by_id(id)[0]['body'], {:file_crc32 => crc32_by_id(id)}]
       end
+    end
+
+    def crc32_by_id(id)
+      crc = ""
+      input_file_slice_checksum_packet_by_id(id)[0]['body']['chunk_checksums'].each do |cc|
+        crc_b = cc['crc32']
+        if crc != ""
+          crc = Zlib.crc32_combine(crc, crc_b, slice_size)
+        else
+          crc = crc_b
+        end
+      end
+      pad_length = slice_size - file_description_packet_by_id(id)[0]['body'].file_length % slice_size
+      crc_z = Zlib.crc32("\0" * pad_length)
+      Partoo::CRC32.crc32_trim_trailing(crc, crc_z, pad_length)
     end
 
     def creator
