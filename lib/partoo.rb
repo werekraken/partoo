@@ -1,4 +1,5 @@
-require "partoo/version"
+require 'partoo/par2_file'
+require 'partoo/version'
 
 module Partoo
   class << self
@@ -9,6 +10,11 @@ module Partoo
 
     def list(par2_file)
       "list of files from #{par2_file}"
+    end
+
+    def dump(par2_file)
+      io = File.open(par2_file)
+      Par2File.read(io)
     end
   end
 end

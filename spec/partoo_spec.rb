@@ -8,4 +8,8 @@ RSpec.describe Partoo do
   it "lists files" do
     expect(Partoo.list("some.par2")).to eql("list of files from some.par2")
   end
+
+  it "dumps packets" do
+    expect(Partoo.dump('spec/fixtures/files/testdata.par2').to_s).to match(/PAR2.*PKT/)
+  end
 end

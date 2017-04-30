@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.executables   = s.files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_dependency "bindata"
   s.add_dependency "thor"
 
   s.add_development_dependency "aruba"
