@@ -36,7 +36,7 @@ module Partoo
         # apply zeros operator for this bit of len2
         gf2_matrix_square_trim(even, odd)
 
-        crc1 = gf2_matrix_times_trim(even, crc1) if len2 & 1
+        crc1 = gf2_matrix_times_trim(even, crc1) if len2 & 1 != 0
         len2 >>= 1
 
         # if no more bits set, then done
@@ -45,7 +45,7 @@ module Partoo
         # another iteration of the loop with odd and even swapped
         gf2_matrix_square_trim(odd, even)
 
-        crc1 = gf2_matrix_times_trim(odd, crc1) if len2 & 1
+        crc1 = gf2_matrix_times_trim(odd, crc1) if len2 & 1 != 0
         len2 >>= 1
 
         # if no more bits set, then done
