@@ -8,13 +8,39 @@ module Partoo
     # TODO: implement #repair
     # TODO: implement #verify
 
-    def list(par2_file)
-      "list of files from #{par2_file}"
-    end
-
     def dump(par2_file)
       io = File.open(par2_file)
       Par2File.read(io)
+    end
+
+    def list(par2_file)
+      io = File.open(par2_file)
+      f = Par2File.read(io)
+      f.list
+    end
+
+    def creator(par2_file)
+      io = File.open(par2_file)
+      f = Par2File.read(io)
+      f.creator
+    end
+
+    def recovery_set_file_count(par2_file)
+      io = File.open(par2_file)
+      f = Par2File.read(io)
+      f.recovery_set_file_count
+    end
+
+    def recovery_set_id(par2_file)
+      io = File.open(par2_file)
+      f = Par2File.read(io)
+      f.recovery_set_id
+    end
+
+    def slice_size(par2_file)
+      io = File.open(par2_file)
+      f = Par2File.read(io)
+      f.slice_size
     end
   end
 end
