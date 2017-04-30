@@ -1,8 +1,6 @@
 # Partoo
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/partoo`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Do cool things with par2 files.
 
 ## Installation
 
@@ -22,7 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+Commands:
+  partoo dump <par2 file>                 # Dump packets in a par2 file as a data structure
+  partoo help [COMMAND]                   # Describe available commands or one specific command
+  partoo inspect <attribute> <par2 file>  # Inspect a particular attribute of a par2 file
+  partoo list <par2 file>                 # Lists files described in a par2 file
+```
 
 ## Development
 
@@ -32,5 +36,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/partoo.
+Bug reports and pull requests are welcome on GitHub at https://github.com/werekraken/partoo.
 
