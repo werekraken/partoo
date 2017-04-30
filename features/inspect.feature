@@ -10,7 +10,7 @@ Feature: Inspect
 
   Scenario: inspect recovery-set-id
     When I run `partoo inspect recovery-set-id ../../spec/fixtures/files/testdata.par2`
-    Then the output should contain "172626095358484736903154840814915262152"
+    Then the output should contain "c8967dab0cb5300fafc594969d93de81"
 
   Scenario: inspect slice-size
     When I run `partoo inspect slice-size ../../spec/fixtures/files/testdata.par2`

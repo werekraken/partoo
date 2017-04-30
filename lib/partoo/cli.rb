@@ -24,7 +24,11 @@ module Partoo
       attributes = ['creator', 'recovery-set-file-count', 'recovery-set-id', 'slice-size']
       raise ArgumentError, "#{item} is not one of #{attributes}" if ! attributes.include?(item)
       method = item.gsub(/-/, '_')
-      puts Partoo.send(method, par2_file)
+      if method == 'recovery_set_id'
+        puts Partoo.send(method, par2_file).to_hex
+      else
+        puts Partoo.send(method, par2_file)
+      end
     end
 
     desc "list <par2 file>", "Lists files described in a par2 file"
