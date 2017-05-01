@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.summary       = "Do cool things with par2 files."
   s.description   = "Partoo parses data from par2 files allowing programatic access."
-#  s.homepage      = "N/A"
+  s.homepage      = "https://github.com/werekraken/partoo"
   s.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
