@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email         = ["werekraken@gmail.com"]
 
   s.summary       = "Do cool things with par2 files."
-  s.description   = "Partoo parses data from par2 files allowing programatic access."
+  s.description   = "Partoo parses data from par2 files allowing programmatic access."
   s.homepage      = "https://github.com/werekraken/partoo"
   s.license       = "MIT"
 
