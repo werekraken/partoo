@@ -12,7 +12,7 @@ module Partoo
 
     desc "inspect <attribute> <par2 file>", "Inspect a particular attribute of a par2 file"
     long_desc <<-LONGDESC
-    Inspect a particular attribute of a par2 file"
+    Inspect a particular attribute of a par2 file
 
     Attributes:
       creator
