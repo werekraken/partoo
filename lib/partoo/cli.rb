@@ -38,5 +38,9 @@ module Partoo
       end
     end
 
+    desc "tomd5 <par2 file>", "Build an md5 file from par2 file data"
+    def tomd5(par2_file)
+      puts Partoo.to_md5(par2_file)
+    end
   end
 end

@@ -28,4 +28,8 @@ RSpec.describe Partoo do
   it "can get slice size" do
     expect(Partoo.slice_size('spec/fixtures/files/testdata.par2')).to eql(5376)
   end
+
+  it "can convert to md5" do
+    expect(Partoo.to_md5('spec/fixtures/files/testdata.par2').to_s).to match(/0441ba6c84c58402dd4cec76865b3ffa  test-0.data\n/)
+  end
 end

@@ -15,6 +15,16 @@ module Partoo
       end
     end
 
+    def to_md5
+      file_ids.sort_by do |id|
+        file_description_packet_by_id(id)[0]['body']['file_name']
+      end.map do |id|
+        file_description_packet_by_id(id)[0]['body']['file_md5'].to_hex
+          .concat('  ')
+          .concat(file_description_packet_by_id(id)[0]['body']['file_name'])
+      end.join("\n").concat("\n")
+    end
+
     def crc32_by_id(id)
       crc = ""
       input_file_slice_checksum_packet_by_id(id)[0]['body']['chunk_checksums'].each do |cc|
