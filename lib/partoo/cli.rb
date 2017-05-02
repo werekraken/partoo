@@ -42,5 +42,10 @@ module Partoo
     def tomd5(par2_file)
       puts Partoo.to_md5(par2_file)
     end
+
+    desc "tosfv <par2 file>", "Build an sfv file from par2 file data"
+    def tosfv(par2_file)
+      puts Partoo.to_sfv(par2_file)
+    end
   end
 end

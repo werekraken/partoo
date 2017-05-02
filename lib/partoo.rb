@@ -48,5 +48,11 @@ module Partoo
       f = Par2File.read(io)
       f.to_md5
     end
+
+    def to_sfv(par2_file)
+      io = File.open(par2_file)
+      f = Par2File.read(io)
+      f.to_sfv
+    end
   end
 end
