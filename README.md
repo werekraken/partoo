@@ -1,3 +1,5 @@
+[![Version     ](https://img.shields.io/gem/v/partoo.svg?style=flat)](https://rubygems.org/gems/partoo)
+
 # Partoo
 
 Do cool things with par2 files.
