@@ -9,6 +9,10 @@ RSpec.describe Partoo do
     expect(Partoo.list('spec/fixtures/files/testdata.par2').to_s).to match(/test-0.data/)
   end
 
+  it "lists files sorted by name" do
+    expect(Partoo.list('spec/fixtures/files/testdata.par2')[0].to_s).to match(/test-0.data/)
+  end
+
   it "can dump packets" do
     expect(Partoo.dump('spec/fixtures/files/testdata.par2').to_s).to match(/PAR2.*PKT/)
   end

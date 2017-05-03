@@ -10,7 +10,9 @@ module Partoo
     array :packets, type: :packet, read_until: :eof
 
     def list
-      file_ids.map do |id|
+      file_ids.sort_by do |id|
+        file_description_packet_by_id(id)[0]['body']['file_name']
+      end.map do |id|
         [file_description_packet_by_id(id)[0]['body'], {:file_crc32 => crc32_by_id(id)}]
       end
     end
