@@ -1,5 +1,13 @@
 module Partoo
   module CRC32
+    #  This code is a ruby port of crc32trim.c.
+    #  https://github.com/werekraken/libcrc32trim
+    #
+    #  crc32trim.c borrows heavily from crc32.c found in zlib version 1.2.8, but
+    #  has been altered.
+    #
+    #  Thanks to Mark Adler <madler@alumni.caltech.edu> for writing zlib's crc32.c,
+    #  his posts about crc32_combine(), and answering questions of the community.
 
     GF2_DIM = 32;
 
