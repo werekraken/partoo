@@ -34,10 +34,10 @@ RSpec.describe Partoo do
   end
 
   it "can convert to md5" do
-    expect(Partoo.to_md5('spec/fixtures/files/testdata.par2').to_s).to match(/0441ba6c84c58402dd4cec76865b3ffa  test-0.data\n/)
+    expect(Partoo.to_md5('spec/fixtures/files/testdata.par2')).to match(/0441ba6c84c58402dd4cec76865b3ffa  test-0.data\n/)
   end
 
   it "can convert to sfv" do
-    expect(Partoo.to_sfv('spec/fixtures/files/testdata.par2').to_s).to match(/test-0.data 20c29458\n/)
+    expect(Partoo.to_sfv('spec/fixtures/files/testdata.par2')).to match(/test-0.data 20c29458\n/)
   end
 end
