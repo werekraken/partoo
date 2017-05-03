@@ -1,4 +1,5 @@
 [![Version     ](https://img.shields.io/gem/v/partoo.svg?style=flat)](https://rubygems.org/gems/partoo)
+[![Build Status](https://img.shields.io/travis/werekraken/partoo/master.svg?style=flat)](https://travis-ci.org/werekraken/partoo)
 
 # Partoo
 
