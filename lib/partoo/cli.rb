@@ -32,9 +32,20 @@ module Partoo
     end
 
     desc "list <par2 file>", "Lists files described in a par2 file"
+    option :crc32, :aliases => "-c", :type => :boolean, :desc => "Include file crc32 in the output"
+    option :long,  :aliases => "-l", :type => :boolean, :desc => "Equivalent to --crc32 --md5 --size"
+    option :md5,   :aliases => "-m", :type => :boolean, :desc => "Include file md5 in the output"
+    option :size,  :aliases => "-s", :type => :boolean, :desc => "Include file size in the output"
     def list(par2_file)
-      Partoo.list(par2_file).each do |f|
-        puts "#{f[0]['file_md5'].to_hex} #{f[1][:file_crc32].to_s(16).rjust(8, '0')} #{f[0]['file_length']} #{f[0]['file_name']}"
+      l = Partoo.list(par2_file)
+      size_print_width = l.map do |f|
+        f[:length].to_s.length
+      end.max
+      l.each do |f|
+        print "#{f[:crc32].to_s(16).rjust(8, '0')} "             if options[:crc32] or options[:long]
+        print "#{f[:md5].to_hex} "                               if options[:md5]   or options[:long]
+        print "#{f[:length].to_s.rjust(size_print_width, ' ')} " if options[:size]  or options[:long]
+        puts  "#{f[:name]}"
       end
     end
 
