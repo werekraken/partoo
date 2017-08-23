@@ -12,10 +12,10 @@ module Partoo
     def list
       file_ids.map do |id|
         f = file_description_packet_by_id(id)[0]['body']
-        { :name => f.file_name,
-          :md5  => f.file_md5,
+        { :name   => f.file_name,
+          :md5    => f.file_md5,
           :length => f.file_length,
-          :crc32 => crc32_by_id(id) }
+          :crc32  => crc32_by_id(id) }
       end
     end
 
