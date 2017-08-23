@@ -1,6 +1,27 @@
+require 'digest'
+require 'zlib'
+
 module Partoo
-  module CRC32
-    #  This code is a ruby port of crc32trim.c.
+  class CRC32 < Digest::Class
+    include Digest::Instance
+
+    def initialize
+      reset
+    end
+
+    def finish
+      [@crc32].pack('N')
+    end
+
+    def reset
+      @crc32 = 0
+    end
+
+    def update(buf)
+      @crc32 = Zlib.crc32(buf, @crc32)
+    end
+
+    #  The below code is a ruby port of crc32trim.c.
     #  https://github.com/werekraken/libcrc32trim
     #
     #  crc32trim.c borrows heavily from crc32.c found in zlib version 1.2.8, but

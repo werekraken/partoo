@@ -58,5 +58,12 @@ module Partoo
     def tosfv(par2_file)
       puts Partoo.to_sfv(par2_file)
     end
+
+    desc "verify <par2 file>", "Verify source files found in a par2 file"
+    def verify(par2_file)
+      Partoo.verify(par2_file).each do |file,result|
+        puts "#{file} #{result}"
+      end
+    end
   end
 end

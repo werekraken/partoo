@@ -1,5 +1,6 @@
 require 'bindata'
 require 'partoo/crc32'
+require 'partoo/source_file'
 require 'zlib'
 
 module Partoo
@@ -9,45 +10,53 @@ module Partoo
 
     array :packets, type: :packet, read_until: :eof
 
+    def initialize_instance
+      super
+      @source_files = Hash.new
+    end
+
     def list
       file_ids.map do |id|
-        f = file_description_packet_by_id(id)['body']
-        { :name   => f.file_name,
-          :md5    => f.file_md5,
-          :length => f.file_length,
-          :crc32  => crc32_by_id(id) }
+        f = source_file_by_id(id)
+        { :name   => f.name,
+          :md5    => f.md5,
+          :length => f.size,
+          :crc32  => f.crc32 }
       end
     end
 
     def to_md5
       file_ids.map do |id|
-        file_description_packet_by_id(id)['body']['file_md5'].to_hex
+        f = source_file_by_id(id)
+        f.md5.to_hex
           .concat('  ')
-          .concat(file_description_packet_by_id(id)['body']['file_name'])
+          .concat(f.name)
       end.join("\n").concat("\n")
     end
 
     def to_sfv
       file_ids.map do |id|
-        file_description_packet_by_id(id)['body']['file_name']
+        f = source_file_by_id(id)
+        f.name
           .concat(' ')
-          .concat(crc32_by_id(id).to_s(16).rjust(8, '0'))
+          .concat(f.crc32.to_s(16).rjust(8, '0'))
       end.join("\n").concat("\n")
     end
 
-    def crc32_by_id(id)
-      crc = nil
-      input_file_slice_checksum_packet_by_id(id)['body']['chunk_checksums'].each do |cc|
-        crc_b = cc['crc32']
-        if crc.nil?
-          crc = crc_b
-        else
-          crc = Zlib.crc32_combine(crc, crc_b, slice_size)
-        end
+    def verify
+      results = Hash.new
+      file_ids.each do |id|
+        f = source_file_by_id(id)
+        results[f.name] = f.verify
       end
-      pad_length = slice_size - file_description_packet_by_id(id)['body'].file_length % slice_size
-      crc_z = Zlib.crc32("\0" * pad_length)
-      Partoo::CRC32.crc32_trim_trailing(crc, crc_z, pad_length)
+      results
+    end
+
+    def source_file_by_id(id)
+      unless @source_files.key?(id)
+        @source_files[id] = Partoo::Source_file.new(id,self)
+      end
+      @source_files[id]
     end
 
     def creator
