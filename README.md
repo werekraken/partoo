@@ -31,6 +31,7 @@ Commands:
   partoo list <par2 file>                 # Lists files described in a par2 file
   partoo tomd5 <par2 file>                # Build an md5 file from par2 file data
   partoo tosfv <par2 file>                # Build an sfv file from par2 file data
+  partoo verify <par2 file>               # Verify source files found in a par2 file
 ```
 
 ## Development
