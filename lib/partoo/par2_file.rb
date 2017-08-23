@@ -36,13 +36,13 @@ module Partoo
     end
 
     def crc32_by_id(id)
-      crc = ""
+      crc = nil
       input_file_slice_checksum_packet_by_id(id)[0]['body']['chunk_checksums'].each do |cc|
         crc_b = cc['crc32']
-        if crc != ""
-          crc = Zlib.crc32_combine(crc, crc_b, slice_size)
-        else
+        if crc.nil?
           crc = crc_b
+        else
+          crc = Zlib.crc32_combine(crc, crc_b, slice_size)
         end
       end
       pad_length = slice_size - file_description_packet_by_id(id)[0]['body'].file_length % slice_size
