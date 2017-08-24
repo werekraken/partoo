@@ -61,8 +61,10 @@ module Partoo
 
     desc "verify <par2 file>", "Verify source files found in a par2 file"
     def verify(par2_file)
-      Partoo.verify(par2_file).each do |file,result|
-        puts "#{file} #{result}"
+      Partoo.verify(par2_file) do |source_file, bytes_read, result|
+        percent_complete = '%.2f' % [ bytes_read.to_f / source_file.real_size.to_f * 100 ]
+        print "#{source_file.name} #{percent_complete}%\r"
+        puts "#{source_file.name} #{result}   " if !result.nil?
       end
     end
   end

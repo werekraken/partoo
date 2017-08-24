@@ -44,14 +44,19 @@ module Partoo
       chunk_size = 32768
       real_crc32 = Partoo::CRC32.new
       real_md5 = Digest::MD5.new
+      bytes_read = 0
       File.open(name, 'rb') do |f|
         until f.eof?
           chunk = f.read(chunk_size)
+          bytes_read += chunk.bytesize
           real_crc32.update(chunk)
           real_md5.update(chunk)
+          yield(self, bytes_read, nil) if block_given?
         end
       end
-      real_crc32.hexdigest == crc32.to_s(16).rjust(8, '0') && real_md5.hexdigest == md5.to_hex
+      result = real_crc32.hexdigest == crc32.to_s(16).rjust(8, '0') && real_md5.hexdigest == md5.to_hex
+      yield(self, bytes_read, result) if block_given?
+      result
     end
 
     def real_size

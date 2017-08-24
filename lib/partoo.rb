@@ -58,7 +58,8 @@ module Partoo
     def verify(par2_file)
       io = File.open(par2_file)
       f = Par2File.read(io)
-      f.verify
+      block = Proc.new if block_given?
+      f.verify(&block)
     end
   end
 end

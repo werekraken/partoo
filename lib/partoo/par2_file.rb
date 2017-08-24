@@ -47,7 +47,8 @@ module Partoo
       results = Hash.new
       file_ids.each do |id|
         f = source_file_by_id(id)
-        results[f.name] = f.verify
+        block = Proc.new if block_given?
+        results[f.name] = f.verify(&block)
       end
       results
     end
