@@ -8,6 +8,7 @@ module Partoo
       @id = id
       @par2 = par2_file_object
       @crc32 = nil
+      @real_size = nil
     end
 
     def name
@@ -51,6 +52,21 @@ module Partoo
         end
       end
       real_crc32.hexdigest == crc32.to_s(16).rjust(8, '0') && real_md5.hexdigest == md5.to_hex
+    end
+
+    def real_size
+      if @real_size.nil?
+        @real_size = File.size?(name)
+      end
+      @real_size
+    end
+
+    def is_truncated?
+      real_size > size
+    end
+
+    def is_oversized?
+      real_size < size
     end
   end
 end
