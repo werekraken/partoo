@@ -4,9 +4,8 @@ require 'partoo/version'
 module Partoo
   class << self
 
-    # TODO: implement #create
-    # TODO: implement #repair
-    # TODO: implement #verify
+    # TODO: implement .create
+    # TODO: implement .repair
 
     def dump(par2_file)
       io = File.open(par2_file)
