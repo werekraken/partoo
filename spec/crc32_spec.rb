@@ -47,7 +47,7 @@ RSpec.describe Partoo::CRC32 do
   end
 
   describe '.crc32_trim_trailing' do
-    it 'returns crcA when given crcAB, crcB, and lengthB.' do
+    it 'returns crcA when given crcAB, crcB, and lengthB' do
       contentsA = "this\n"
       contentsB = "that\n"
       crcA = Zlib.crc32(contentsA)
