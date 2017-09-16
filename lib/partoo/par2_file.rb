@@ -15,6 +15,13 @@ module Partoo
       @source_files = Hash.new
     end
 
+    class << self
+      def open(par2_file)
+        io = File.open(par2_file)
+        Par2File.read(io)
+      end
+    end
+
     def list
       file_ids.map do |id|
         f = source_file_by_id(id)
