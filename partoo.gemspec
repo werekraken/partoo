@@ -6,7 +6,7 @@ require 'partoo/version'
 Gem::Specification.new do |s|
   s.name          = "partoo"
   s.version       = Partoo::VERSION
-  s.authors       = ["matt.cover"]
+  s.authors       = ["Matt Cover"]
   s.email         = ["werekraken@gmail.com"]
 
   s.summary       = "Do cool things with par2 files."
