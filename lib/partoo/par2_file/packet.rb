@@ -11,7 +11,7 @@ module Partoo
       require 'partoo/par2_file/packet/recovery_slice'
 
       endian  :little
-      string  :magic, :read_length => 8, :initial_value => "PAR2\0PKT"
+      string  :magic, :read_length => 8, :value => "PAR2\0PKT"
       uint64  :packet_length
       uint128 :packet_md5
       uint128 :recovery_set_id
